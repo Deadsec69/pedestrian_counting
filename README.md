@@ -8,7 +8,7 @@ This is project which uses Tensorflow Object Detection API. Most of the code has
 Pedestrian Counting can be extented to various applications. This repository include running the code 
 by simply running the command
 
-``` python pede ```
+``` pedestrian_counting.py ```
 
 It also incorporates the feature to store the log in a csv.
 
