@@ -6,7 +6,8 @@ This is project which uses Tensorflow Object Detection API. Most of the code has
    o> https://github.com/tensorflow/models
    
 Pedestrian Counting can be extented to various applications. This repository include running the code 
-by simply running the command
+by simply running the commands
+`pip install -r requirements.txt`
 
 ``` pedestrian_counting.py ```
 
