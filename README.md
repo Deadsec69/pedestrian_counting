@@ -1,17 +1,27 @@
 # Pedestrian Counting
 Pedestrian Counting using Tensorflow Object detection
+Pedestrian Counting can be extented to various applications.
+It also incorporates the feature to store the log in a csv.
 
 This is project which uses Tensorflow Object Detection API. Most of the code has been borrowed from
    o> https://github.com/ahmetozlu/tensorflow_object_counting_api.
    o> https://github.com/tensorflow/models
    
-Pedestrian Counting can be extented to various applications. This repository include running the code 
-by simply running the commands
-`pip install -r requirements.txt`
+Prerequisite:
+   
+   Using Conda
+      o> Create new conda enviornment ``` create new -n env python=3.6 ```
+      o> conda activate env
+      o> pip install -r requirements.txt
+   
+   Using virtualenv
+      o> pip install -r requirements.txt
 
-``` pedestrian_counting.py ```
+This repository include running the code by simply running the command
 
-It also incorporates the feature to store the log in a csv.
+``` python pedestrian_counting.py ```
+
+
 
 
 
