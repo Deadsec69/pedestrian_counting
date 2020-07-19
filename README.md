@@ -10,12 +10,12 @@ This is project which uses Tensorflow Object Detection API. Most of the code has
 Prerequisite:
    
    Using Conda
-      o> Create new conda enviornment ``` create new -n env python=3.6 ``` \n
-      o> conda activate env \n
-      o> pip install -r requirements.txt \n
+      o> Create new conda enviornment ``` create new -n env python=3.6 ``` <br>
+      o> conda activate env <br>
+      o> pip install -r requirements.txt <br>
    
-   Using virtualenv
-      o> pip install -r requirements.txt
+   Using virtualenv <br>
+      o> pip install -r requirements.txt <br>
 
 This repository include running the code by simply running the command
 
