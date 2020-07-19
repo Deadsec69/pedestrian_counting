@@ -3,9 +3,9 @@ Pedestrian Counting using Tensorflow Object detection
 Pedestrian Counting can be extented to various applications.
 It also incorporates the feature to store the log in a csv.
 
-This is project which uses Tensorflow Object Detection API. Most of the code has been borrowed from \n
-   o> https://github.com/ahmetozlu/tensorflow_object_counting_api. \n
-   o> https://github.com/tensorflow/models \n
+This is project which uses Tensorflow Object Detection API. Most of the code has been borrowed from <br>
+   o> https://github.com/ahmetozlu/tensorflow_object_counting_api. <br>
+   o> https://github.com/tensorflow/models <br>
    
 Prerequisite:
    
