@@ -46,6 +46,7 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
             num_detections = detection_graph.get_tensor_by_name('num_detections:0')
 
             # for all the frames that are extracted from input video
+            import math
             while(cap.isOpened()):
                 ret, frame = cap.read()                
 
@@ -64,7 +65,35 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
                     feed_dict={image_tensor: image_np_expanded})
 
                 # insert information text to video frame
+                bboxes = np.squeeze(boxes)
+                num = int(num[0])
+                width = input_frame.shape[0]
+                height = input_frame.shape[1]
+                if num==2:
+                        
+                    bboxes[0][2] = bboxes[0][2] * width
+                    bboxes[0][3] = bboxes[0][3] * height
+                    bboxes[1][2] = bboxes[1][2] * width
+                    bboxes[1][3] = bboxes[1][3] * height
+                        
+                    centroid1 = (bboxes[0][2]/2 , bboxes[0][3]/2)
+                    centroid2 = (bboxes[1][2]/2 , bboxes[1][3]/2)
+                    #print("centroid1 ",centroid1, bboxes[0][2] , bboxes[0][3])
+                        
+                    
+
+                    try:
+                        dist = math.sqrt(((centroid2[0]**2 - centroid1[0]**2)+(centroid2[1]**2-centroid1[1]**2) ))
+#                         print(bboxes[i] , '\n\n')
+                    except Exception as e:
+                        print(e)
+                    #print("*******************************", dist) 
+                if dist < 30:
+                    flag = 1
+                else:
+                    flag = 0
                 font = cv2.FONT_HERSHEY_SIMPLEX
+                
 
                 # Visualization of the results of a detection.        
                 counter, csv_line, counting_mode = vis_util.visualize_boxes_and_labels_on_image_array_x_axis(cap.get(1),
@@ -89,10 +118,13 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
                 total_passed_vehicle = total_passed_vehicle + counter
 
                 # insert information text to video frame
+                text = 'Pedestrians Detected '
+                if flag:
+                    text = text + " Without distance "
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 cv2.putText(
                     input_frame,
-                    'Pedestrians Detected ' + str(total_passed_vehicle),
+                    text + str(total_passed_vehicle),
                     (10, 35),
                     font,
                     0.8,
@@ -113,7 +145,7 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
                     cv2.LINE_AA,
                     )
 
-                cv2.imshow('object counting',input_frame)
+                #cv2.imshow('object counting',input_frame)
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
