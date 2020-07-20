@@ -69,15 +69,21 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
                 num = int(num[0])
                 width = input_frame.shape[0]
                 height = input_frame.shape[1]
+                dist=10000
                 if num==2:
                         
+                    bboxes[0][0] = bboxes[0][0] * width
+                    bboxes[0][1] = bboxes[0][1] * height
                     bboxes[0][2] = bboxes[0][2] * width
                     bboxes[0][3] = bboxes[0][3] * height
+                    
+                    bboxes[1][0] = bboxes[1][0] * width
+                    bboxes[1][1] = bboxes[1][1] * height
                     bboxes[1][2] = bboxes[1][2] * width
                     bboxes[1][3] = bboxes[1][3] * height
                         
-                    centroid1 = (bboxes[0][2]/2 , bboxes[0][3]/2)
-                    centroid2 = (bboxes[1][2]/2 , bboxes[1][3]/2)
+                    centroid1 = ((bboxes[0][2]-bboxes[0][2])/2 , (bboxes[0][3]-bboxes[0][1])/2)
+                    centroid2 = ((bboxes[1][2]-bboxes[1][0])/2 , (bboxes[1][3]-bboxes[1][1])/2)
                     #print("centroid1 ",centroid1, bboxes[0][2] , bboxes[0][3])
                         
                     
@@ -145,7 +151,7 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
                     cv2.LINE_AA,
                     )
 
-                #cv2.imshow('object counting',input_frame)
+                cv2.imshow('object counting',input_frame)
 
                 if cv2.waitKey(1) & 0xFF == ord('q'):
                         break
