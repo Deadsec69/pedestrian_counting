@@ -65,12 +65,13 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
                     feed_dict={image_tensor: image_np_expanded})
 
                 # insert information text to video frame
-                bboxes = np.squeeze(boxes)
-                num = int(num[0])
+                bboxes = np.squeeze(boxes).copy()
+                nnum = int(num[0])
+                print("num ",nnum)
                 width = input_frame.shape[0]
                 height = input_frame.shape[1]
                 dist=10000
-                if num==2:
+                if nnum>=2:
                         
                     bboxes[0][0] = bboxes[0][0] * width
                     bboxes[0][1] = bboxes[0][1] * height
@@ -90,11 +91,11 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
 
                     try:
                         dist = math.sqrt(((centroid2[0]**2 - centroid1[0]**2)+(centroid2[1]**2-centroid1[1]**2) ))
-#                         print(bboxes[i] , '\n\n')
+                        print(dist , "  ", nnum, '\n')
                     except Exception as e:
                         print(e)
                     #print("*******************************", dist) 
-                if dist < 30:
+                if dist < 140:
                     flag = 1
                 else:
                     flag = 0
@@ -116,10 +117,10 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
                                                                                                              line_thickness=4)
                                
                 # when the vehicle passed over line and counted, make the color of ROI line green
-                if counter == 1:
-                  cv2.line(input_frame, (roi, 0), (roi, height), (0, 255, 0), 5)
-                else:
-                  cv2.line(input_frame, (roi, 0), (roi, height), (0, 0, 255), 5)
+                # if counter == 1:
+                #   cv2.line(input_frame, (roi, 0), (roi, height), (0, 255, 0), 5)
+                # else:
+                #   cv2.line(input_frame, (roi, 0), (roi, height), (0, 0, 255), 5)
 
                 total_passed_vehicle = total_passed_vehicle + counter
 
@@ -130,7 +131,7 @@ def cumulative_object_counting_x_axis(input_video, detection_graph, category_ind
                 font = cv2.FONT_HERSHEY_SIMPLEX
                 cv2.putText(
                     input_frame,
-                    text + str(total_passed_vehicle),
+                    text + str(nnum),
                     (10, 35),
                     font,
                     0.8,
